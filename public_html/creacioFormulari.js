@@ -2,10 +2,12 @@
 
 var botoGenerarFormulari = document.getElementById("generarFormulari");
 var titolFormulari = document.getElementById("nomFomrulari");
+var body = document.getElementsByTagName("body")[0];
 
 var countForm = 0;
 
 botoGenerarFormulari.addEventListener("click", esPotCrear);
+body.addEventListener("mouseenter",ampliarFormulari);
 
 //Comproba que existeixi un titol per el formulari, sino no el crea.
 function esPotCrear() {
@@ -18,7 +20,7 @@ function esPotCrear() {
 }
 
 function generarFormulari(titol) {
-    var body = document.getElementsByTagName("body")[0];
+    
 
     var form = document.createElement("form");
     
@@ -34,4 +36,8 @@ function generarFormulari(titol) {
     form.appendChild(ultimaLinea);
     
     body.appendChild(form);
+}
+
+function ampliarFormulari(e){
+    
 }
