@@ -21,10 +21,17 @@ function generarFormulari(titol) {
     var body = document.getElementsByTagName("body")[0];
 
     var form = document.createElement("form");
+    
+    form.id = "form"+countForm;
+    countForm++;
 
     var contingut = document.createTextNode(titol);
     
     form.appendChild(contingut);
-
+    
+    var ultimaLinea = document.createElement("HR");
+    
+    form.appendChild(ultimaLinea);
+    
     body.appendChild(form);
 }
