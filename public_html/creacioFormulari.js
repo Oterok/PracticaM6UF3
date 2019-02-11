@@ -4,7 +4,7 @@ var botoGenerarFormulari = document.getElementById("generarFormulari");
 var titolFormulari = document.getElementById("nomFomrulari");
 var body = document.getElementsByTagName("body")[0];
 
-var countForm = 0;
+countForm = 0;
 
 botoGenerarFormulari.addEventListener("click", esPotCrear);
 
@@ -20,7 +20,7 @@ function esPotCrear() {
 
 function generarFormulari(titol) {
     
-    var form = document.createElement("form");
+    form = document.createElement("form");
     
     form.id = "form"+countForm;
     countForm++;
@@ -29,10 +29,10 @@ function generarFormulari(titol) {
     
     form.appendChild(contingut);
     
-    var ultimaLinea = document.createElement("HR");
+    var ultimaLinea = document.createElement("hr");
     
+    generaLlista(form);
     form.appendChild(ultimaLinea);
-    
     body.appendChild(form);
     
     //Genera el esdeveniment per el form que es genera.
@@ -72,4 +72,55 @@ function generaLlista(form) {
         option.text = opcions[i];
         seleccio.appendChild(option);
     }
+
+    comptaInput = 0;
+    comptaTexts = 0;
+    comptaDates = 0;
+}
+
+function elementSeleccionat(){
+
+    var e = document.getElementById("seleccio").value;
+
+    if (e === "Input") {
+
+        var generaInput = document.createElement("input");
+        generaInput.setAttribute ("type", "text");
+        generaInput.setAttribute("id", (countForm + "-date-" + comptaInput)); //Aquest countForm només ens servirà per afegir-ho correctament al ultim formulari generat, si volem tornar i afegir més coses després d'haver creat més ja no serà correcte
+        form.appendChild(generaInput);
+        comptaInput++;
+
+    } else if (e === "Text") {
+
+        var generaText = document.createElement("input");
+        generaText.setAttribute("type", "text");
+        form.appendChild(generaText);
+        comptaTexts++;
+
+    } else if (e === "Data") {
+
+        var generaData = document.createElement("input");
+        generaData.setAttribute ("type", "date");
+        form.appendChild(generaData);
+        comptaDates++;
+
+    } else if (e === "Fitxer") {
+
+        var generaFitxer = document.createElement("input");
+        generaFitxer.setAttribute ("type", "file");
+        form.appendChild(generaFitxer);
+        
+    } else if (e === "Rang") {
+
+        var generaRang = document.createElement("input");
+        form.appendChild(generaRang);
+        
+    } else if (e === "Email") {
+
+        var generaEmail = document.createElement("input");
+        generaFitxer.setAttribute ("type", "email");
+        form.appendChild(generaEmail);
+        
+    }
+
 }
