@@ -57,3 +57,19 @@ function ocultarBotoFormulari(e){
     
     console.log(e);
 }
+
+function generaLlista(form) {
+
+    var opcions = ["Input", "Text", "Data", "Fitxer", "Rang", "Email"]; //Valors que l'usuari pot seleccionar per omplir el seu formulari
+    var seleccio = document.createElement("select"); //Creem el element select
+
+    seleccio.id = "seleccio"; //Posem el ID a la llista. Potser cal que es canvii el "ID" de cada select per cada formulari?
+    form.appendChild(seleccio); //Afegim el select al formulari
+
+    for (var i = 0; i < opcions.length; i++) {
+        var option = document.createElement("option");
+        option.value = opcions[i];
+        option.text = opcions[i];
+        seleccio.appendChild(option);
+    }
+}
