@@ -7,7 +7,6 @@ var body = document.getElementsByTagName("body")[0];
 var countForm = 0;
 
 botoGenerarFormulari.addEventListener("click", esPotCrear);
-body.addEventListener("mouseenter",ampliarFormulari);
 
 //Comproba que existeixi un titol per el formulari, sino no el crea.
 function esPotCrear() {
@@ -21,7 +20,6 @@ function esPotCrear() {
 
 function generarFormulari(titol) {
     
-
     var form = document.createElement("form");
     
     form.id = "form"+countForm;
@@ -36,8 +34,16 @@ function generarFormulari(titol) {
     form.appendChild(ultimaLinea);
     
     body.appendChild(form);
+    
+    //Genera el esdeveniment per el form que es genera.
+    document.getElementById(form.id).addEventListener("mouseenter",ampliarFormulari);
 }
 
 function ampliarFormulari(e){
+    //alert(""+e.originalTarget.children[countForm+2].form.id);
+    for(var i=0;i!=countForm;i++){
+        document.getElementById("form"+i);
+    }
     
+    console.log(e);
 }
