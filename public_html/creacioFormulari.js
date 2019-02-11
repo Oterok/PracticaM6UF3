@@ -37,9 +37,19 @@ function generarFormulari(titol) {
     
     //Genera el esdeveniment per el form que es genera.
     document.getElementById(form.id).addEventListener("mouseenter",ampliarFormulari);
+    document.getElementById(form.id).addEventListener("mouseleave",ampliarFormulari);
 }
 
-function ampliarFormulari(e){
+function mostrarBotoFormulari(e){
+    //alert(""+e.originalTarget.children[countForm+2].form.id);
+    for(var i=0;i!=countForm;i++){
+        document.getElementById("form"+i);
+    }
+    
+    console.log(e);
+}
+
+function ocultarBotoFormulari(e){
     //alert(""+e.originalTarget.children[countForm+2].form.id);
     for(var i=0;i!=countForm;i++){
         document.getElementById("form"+i);
