@@ -9,20 +9,45 @@ and open the template in the editor.
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="estilo.css">
     </head>
     <body>
-        <div>
-            <p>
-                Per començar a generar un formulari, 
-                escrigui el nom del formulari i premi el boto 'Generar formulari'.
-            </p>
-            </br>
-            <label>Nom Formulari: </label><input id='nomFomrulari'>
-            </br></br>
-                <input id='generarFormulari' type="button" value="Generar formulari">
-                <button onclick="elementSeleccionat()">Generar element</button>
-            <hr>
-        </div>
+        <header id="main-header">
+            <a id="logo-header" href="#">
+                <p class="site-name">Desenvolupament web en entorn client</p>
+                <!-- <img src="logo.png" id="logo" /> -->
+            </a> <!-- / #logo-header -->
+            <nav>
+                <ul>
+                    <li><input id='Input' class="cajaLeft" type="button" value="Input"></li>
+                    <li><input id='Text' class="cajaLeft" type="button" value="Text"></li>
+                    <li><input id='Data' class="cajaLeft" type="button" value="Data"></li>
+                    <li><input id='Fitxer' class="cajaLeft" type="button" value="Fitxer"></li>
+                    <li><input id='Rang' class="cajaLeft" type="button" value="Rang"></li>
+                    <li><input id='Email' class="cajaLeft" type="button" value="Email"></li>
+                </ul>
+            </nav><!-- / nav -->
+            <nav>
+                <ul>
+                    <li><label>Nom Formulari: </label><input id='nomFomrulari'></li>
+                    <li><input id='generarFormulari' type="button" value="Generar formulari"></li>
+                    <li><input id='elementSeleccionat' type="button" value="Generar element"></li>
+                </ul>
+            </nav><!-- / nav -->
+        </header><!-- / #main-header -->
+        <section id="contenidorforms">
+            <article>
+                <div id="contenidorforms" class="content">
+                    <!-- Aqui se agregan los forms.-->
+                </div>
+            </article> <!-- /article -->
+        </section> <!-- / #main-content -->
+        <footer id="main-footer">
+                <ul>
+                    <li>Alumne: Aleix Freixa</li>
+                    <li>Alumne: David Otero</li>
+                </ul>
+        </footer> <!-- / #main-footer -->
         <script type="text/javascript" src="creacioFormulari.js">
         </script>
     </body>
