@@ -57,7 +57,7 @@ function ocultarBotoFormulari(e) {
 
 function generaLlista(form) {
   var opcions = ["Input", "Text", "Data", "Fitxer", "Rang", "Email", "Radios", "Checkbox"]; //Valors que l'usuari pot seleccionar per omplir el seu formulari
-  var seleccio = document.createElement("select"); //Creem el element select
+  var seleccio = document.createElement("select"); //Genera el element select al formulari
 
   seleccio.id = "seleccio" + (countForm-1); //Posem el ID a la llista. Potser cal que es canvii el "ID" de cada select per cada formulari?
   form.appendChild(seleccio); //Afegim el select al formulari
@@ -137,10 +137,10 @@ function elementSeleccionat() {
        var valorRadio = prompt("Introdueix el text per el radio numero" + i + ": ", "Opció " + i);
        
        var generaRadio = document.createElement("input");
-
         generaRadio.setAttribute("type", "radio");
         generaRadio.setAttribute("id","form-" + f + "-radio-" + arrayInputs[f][6]);
         generaRadio.setAttribute("name", nomRadios);
+        generaRadio.setAttribute("value", valorRadio);
 
         var generaLabel = document.createElement("label");
         form.appendChild(generaLabel);
@@ -152,17 +152,25 @@ function elementSeleccionat() {
 
     }
 
-    
-    
   } else if (e === "Checkbox") {
+
+    var nomCeckbox = prompt("Introdueix el nom d'aquesta grup d'opcions (p.ex: cotxes).", "cotxes");
+    var valorCheckbox = prompt("Introdueix el text per l'opció d'aquest checkbox", "text");
 
     var generaCheckbox = document.createElement("input");
     generaCheckbox.setAttribute("type", "checkbox");
     generaCheckbox.setAttribute("id","form-" + f + "-checkbox-" + arrayInputs[f][7]);
+    generaCheckbox.setAttribute("name", nomCeckbox);
+    generaCheckbox.setAttribute("value", nomCeckbox);
+
+    var generaLabel = document.createElement("label");
+    form.appendChild(generaLabel);
+    generaLabel.innerHTML = nomCeckbox;
+
     form.appendChild(generaCheckbox);
+    generaCheckbox.innerHTML = nomCeckbox;
     arrayInputs[f][7]++;
 
-  }
-
+}
   console.log(arrayInputs);
 }
