@@ -138,6 +138,10 @@ Y por último, con esto estilizaremos el pie de página:
     color: white;
 }
 
+#main-footer li {
+    list-style-type: none;
+}
+
 /*
 fijar la cabecera
 */

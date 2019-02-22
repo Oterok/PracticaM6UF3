@@ -1,13 +1,15 @@
 var botoGenerarFormulari = document.getElementById("generarFormulari");
 var botoeliminarElement = document.getElementById("eliminarElement");
-var titolFormulari = document.getElementById("nomFomrulari");
+var titolFormulari = document.getElementById("nomFormulari");
 var contenidorforms = document.getElementById("contenidorforms");
 var body = document.getElementsByTagName("body")[0];
 
 var countForm = 0;
 var llistatForm = [];
 var arrayInputs = [[]];
-var idFormACtual;
+var nomForms = [];
+var idFormActual;
+var existeix = false;
 
 botoGenerarFormulari.addEventListener("click", esPotCrear);
 botoeliminarElement.addEventListener("click", removeElement);
@@ -22,27 +24,61 @@ document.getElementById("Check").addEventListener("click", agregarCheckbox);
 
 body.addEventListener("click", seleccionarFormulari);
 
-//Comproba que existeixi un titol per el formulari, sino no el crea.
 function esPotCrear() {
-    if (titolFormulari.value != "") {
-        generarFormulari(titolFormulari.value);
-        titolFormulari.value = "";
+
+    var nouNomFormulari = titolFormulari.value;
+    
+    if (nouNomFormulari != "") { // Comproba que s'hagi escrit un nou nom pel formulari
+
+        comprobarNom(nouNomFormulari); // Comproba a la funció "comprobarNom" si el nou nom pel formulari ja existeix
+
+        if (existeix === false) { //En cas que la funcio "comprobarNom" retorni "false", es crea el nou formulari
+
+            console.log(llistatForm);
+            generarFormulari(nouNomFormulari);
+            nomForms.push(nouNomFormulari);
+            nouNomFormulari = "";
+
+        } else { //Si de la funcio "comprobarNom" es retorna "true" salta l'alerta i no es crea el formulari
+
+            alert("El nom d'aquest formulari ja existeix.");
+
+        }
+
     } else {
+        
         alert("No has possat titol.");
+
     }
+ 
+    function comprobarNom(nouNom){
+
+        existeix = false;
+    
+        for (var i=0; i <nomForms.length; i++) {
+            var nom = nomForms[i];
+            if (nom == nouNom) {
+                existeix = true;
+                break;
+            }
+        }
+
+        return existeix;
+
+    }
+
 }
 
 function generarFormulari(titol) {
 
     var form = document.createElement("form");
-
     form.id = "form" + countForm;
-
     form.class = "main-content";
 
-    var contingut = document.createTextNode(titol);
-
-    form.appendChild(contingut);
+    var titolForm = document.createElement("h3");
+    titolForm.setAttribute("id", "form-" + countForm + "-titol");
+    titolForm.innerHTML = titol;
+    form.appendChild(titolForm);
 
     var ultimaLinea = document.createElement("hr");
 
@@ -52,33 +88,33 @@ function generarFormulari(titol) {
     llistatForm[countForm] = form;
 
     countForm++;
-    //Genera el esdeveniment per el form que es genera.
-    //document.getElementById(form.id).addEventListener("mouseenter",ampliarFormulari);
-    //document.getElementById(form.id).addEventListener("mouseleave",ampliarFormulari);
-
-    arrayInputs[countForm - 1] = [[0], [0], [0], [0], [0], [0], [0], [0]]; //Inicialitza una array plena de zeros
+    arrayInputs[countForm - 1] = [[0], [0], [0], [0], [0], [0], [0], [0]]; //Inicialitza un array plena de zeros
 
 }
 
 function seleccionarFormulari(e) {
     if (e.srcElement.id.substring(0, 4) == "form") {
-        if (idFormACtual != null) {
-            document.getElementById(idFormACtual).style.border = "thick solid #FFFFFF";
+        if (idFormActual != null) {
+            document.getElementById(idFormActual).style.border = "thick solid #FFFFFF";
         }
         //document.getElementById(e.srcElement.id.substring).style='border:10p x solid #CCCCCC;';
         document.getElementById(e.srcElement.id).style.border = "thick solid #CCCCCC";
-        idFormACtual = e.srcElement.id;
+        idFormActual = e.srcElement.id;
         botoOcult = true;
+        console.log(llistatForm);
     }
 }
 
 function removeElement(e){
-    if (idFormACtual != null) {
+    
+    if (idFormActual != null) {
         console.log(e);
-        document.getElementById(idFormACtual).remove();
-        //document.getElementById(idFormACtual).remove();
-        idFormACtual = null;
+        document.getElementById(idFormActual).remove();
+        //document.getElementById(idFormActual).remove();
+        idFormActual = null;
+        console.log(llistatForm);
     }
+
 }
 
 function comprobarSiEsForm(id) {
@@ -88,9 +124,9 @@ function comprobarSiEsForm(id) {
     return false;
 }
 
-function agregarInput(e) {
+function agregarInput() {
 
-    var f = idFormACtual.substring(4, 5);
+    var f = idFormActual.substring(4, 5);
     //if (comprobarSiEsForm(f)) {
         var generaInput = document.createElement("input");
         generaInput.setAttribute("type", "text");
@@ -101,7 +137,7 @@ function agregarInput(e) {
 }
 
 function agregarText(e) {
-    var f = idFormACtual.substring(4, 5);
+    var f = idFormActual.substring(4, 5);
     var generaText = document.createElement("input");
     generaText.setAttribute("type", "text");
     generaText.setAttribute("id", "form-" + f + "-text-" + arrayInputs[f][1]);
@@ -111,7 +147,7 @@ function agregarText(e) {
 }
 
 function agregarData(e) {
-    var f = idFormACtual.substring(4, 5);
+    var f = idFormActual.substring(4, 5);
     var generaData = document.createElement("input");
     generaData.setAttribute("type", "date");
     generaData.setAttribute("id", "form-" + f + "-date-" + arrayInputs[f][2]);
@@ -121,7 +157,7 @@ function agregarData(e) {
 }
 
 function agregarFitxer(e) {
-    var f = idFormACtual.substring(4, 5);
+    var f = idFormActual.substring(4, 5);
     var generaFitxer = document.createElement("input");
     generaFitxer.setAttribute("type", "file");
     generaFitxer.setAttribute("id", "form-" + f + "-file-" + arrayInputs[f][3]);
@@ -131,7 +167,7 @@ function agregarFitxer(e) {
 }
 
 function agregarRang(e) {
-    var f = idFormACtual.substring(4, 5);
+    var f = idFormActual.substring(4, 5);
     var minim = prompt("Introdueix el valor minim", "1");
     var maxim = prompt("Introdueix el valor maxim", "10");
     var generaRang = document.createElement("input");
@@ -146,17 +182,33 @@ function agregarRang(e) {
 }
 
 function agregarEmail(e) {
-    var f = idFormACtual.substring(4, 5);
+    var f = idFormActual.substring(4, 5);
     var generaEmail = document.createElement("input");
     generaEmail.setAttribute("type", "email");
     generaEmail.setAttribute("id", "form-" + f + "-emails-" + arrayInputs[f][5]);
     llistatForm[f].appendChild(generaEmail);
     arrayInputs[f][5]++;
 
-}
+    generaEmail.addEventListener("change", verificarEmail);
+
+    }
+
+    function verificarEmail(e){
+
+        var text = document.getElementById(idFormActual).value;
+        console.log(document.getElementById(idFormActual));
+        var expres = new RegExp("/^((?:(?:[^?+*{}()[\]\\|]+|\\.|\[(?:\^?\\.|\^[^\\]|[^\\^])(?:[^\]\\]+|\\.)*\]|\((?:\?[:=!]|\?<[=!]|\?>)?(?1)??\)|\(\?(?:R|[+-]?\d+)\))(?:(?:[?+*]|\{\d+(?:,\d*)?\})[?+]?)?|\|)*)$/");
+        alert("Q");
+        if (expres.test(text)) {
+            alert("si");
+        } else {
+            alert("\w{1,100}");
+        }
+        
+    }
 
 function agregarRadio(e) {
-    var f = idFormACtual.substring(4, 5);
+    var f = idFormActual.substring(4, 5);
     var quantitatRadios = prompt("Introdueix quants radios vols generar", "3");
     var nomRadios = prompt("Introdueix el nom d'aquesta grup d'opcions (p.ex: cotxes).", "cotxes");
 
@@ -183,7 +235,7 @@ function agregarRadio(e) {
 }
 
 function agregarCheckbox(e) {
-    var f = idFormACtual.substring(4, 5);
+    var f = idFormActual.substring(4, 5);
     var nomCeckbox = prompt("Introdueix el nom d'aquesta grup d'opcions (p.ex: cotxes).", "cotxes");
     var valorCheckbox = prompt("Introdueix el text per l'opció d'aquest checkbox", "text");
 
