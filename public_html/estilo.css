@@ -1,3 +1,8 @@
+/*
+Aquest estil CSS sa adaptat de una practica a realitzar de una pagina web.
+*/
+
+
 body {
     margin: 0;
     padding: 0;
@@ -7,7 +12,7 @@ body {
     font-size: 1em;
     line-height: 1.5em;
     
-    padding-top: 160px; /* Relleno superior igual a la altura de la cabecera*/
+    padding-top: 160px;
 }
 
 h1 {

@@ -1,9 +1,14 @@
 var botoGenerarFormulari = document.getElementById("generarFormulari");
+//Variables globals y esdeveniments:
+
+
+//Botons i contenidors.
 var botoeliminarElement = document.getElementById("eliminarElement");
 var titolFormulari = document.getElementById("nomFormulari");
 var contenidorforms = document.getElementById("contenidorforms");
 var body = document.getElementsByTagName("body")[0];
 
+//Variables globals
 var countForm = 0;
 var llistatForm = [];
 var arrayInputs = [[]];
@@ -11,6 +16,7 @@ var nomForms = [];
 var idFormActual;
 var existeix = false;
 
+//esdeveniments
 botoGenerarFormulari.addEventListener("click", esPotCrear);
 botoeliminarElement.addEventListener("click", removeElement);
 document.getElementById("Input").addEventListener("click", agregarInput);
@@ -26,6 +32,7 @@ document.getElementById("Label").addEventListener("click", agregarLabel);
 
 body.addEventListener("click", seleccionarFormulari);
 
+//Aquesta funcio serveix per verificar si es pot crear el formulari.
 function esPotCrear() {
     var nouNomFormulari = titolFormulari.value;
 
@@ -47,7 +54,8 @@ function esPotCrear() {
         alert("No has possat titol.");
 
     }
-
+    
+    //Aquesta funcion serveix per verificar si el nom que es vols possar al neu form existeix
     function comprobarNom(nouNom) {
         existeix = false;
         for (var i = 0; i < nomForms.length; i++) {
@@ -63,6 +71,7 @@ function esPotCrear() {
 
 }
 
+//Aquesta funcion serveix per afegir el form dins del <section id="contenidorforms"> del html.
 function generarFormulari(titol) {
 
     var form = document.createElement("form");
@@ -93,6 +102,7 @@ function generarFormulari(titol) {
 
 }
 
+//Aquesta funcion serveix per seleccionar el element a traves del esdeveniment onclik
 function seleccionarFormulari(e) {
     if (e.srcElement.id.substring(0, 4) == "form") {
         
@@ -120,7 +130,7 @@ function seleccionarFormulari(e) {
     }
 }
 
-
+//Aquesta funcion serveix per eliminar el elemnet selecionat
 function removeElement(e) {
     if (idFormActual != null) {
         document.getElementById(idFormActual).remove();
@@ -128,6 +138,8 @@ function removeElement(e) {
     }
 
 }
+
+//Aquestes funcions serveixen per agregar els diferents elements al form selecionat.
 
 function agregarInput() {
 
